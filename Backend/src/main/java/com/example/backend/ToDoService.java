@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -21,7 +22,9 @@ public class ToDoService {
     }
 
     public ToDo addToDo(ToDo toDo) {
-        return toDoRepo.addToDo(toDo);
+        String id = UUID.randomUUID().toString();
+        ToDo todo = new ToDo(id, toDo.description(), toDo.status());
+        return toDoRepo.addToDo(todo);
     }
 
 

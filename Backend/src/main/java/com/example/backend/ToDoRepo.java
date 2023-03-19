@@ -16,8 +16,7 @@ public class ToDoRepo {
     }
 
     public ToDo addToDo(ToDo toDo) {
-        ToDo todo = new ToDo(UUID.randomUUID().toString(), toDo.description(), toDo.status());
-        todos.add(todo);
+        todos.add(toDo);
         return toDo;
     }
 
