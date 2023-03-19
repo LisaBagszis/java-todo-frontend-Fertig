@@ -20,6 +20,7 @@ public class Controller {
     public List<ToDo> listToDos() {
         return service.listToDos();
     }
+
     @GetMapping("/todo/{randomId}")
     public ToDo giveDetailsofToDo(@PathVariable String randomId) {
         return service.giveDetails(randomId);
