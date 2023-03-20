@@ -22,7 +22,7 @@ public class Controller {
     }
 
     @GetMapping("/todo/{randomId}")
-    public ToDo giveDetailsofToDo(@PathVariable String randomId) {
+    public ToDo giveDetailsAndAloudEditToDo(@PathVariable String randomId) {
         return service.giveDetails(randomId);
     }
 

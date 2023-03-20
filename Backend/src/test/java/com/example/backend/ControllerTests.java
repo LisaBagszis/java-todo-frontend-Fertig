@@ -23,6 +23,9 @@ class ControllerTests {
     @Autowired
     ToDoRepo toDoRepo;
 
+    @Autowired
+    ToDoService toDoService;
+
     @Test
     @DirtiesContext
     void getToDos_shouldReturnEmptyListWhenListIsEmpty() throws Exception {
@@ -40,9 +43,33 @@ class ControllerTests {
     @DirtiesContext
     void ShouldReturnListWhenListIsFilled() throws Exception {
         ToDo todo = new ToDo("123", "test" ,Status.OPEN);
-        toDoRepo.addToDo(todo);
+        toDoService.giveDetails(todo);
 
         mockMvc.perform(get("/api/todo"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(
+                        """
+                                
+                                
+                                    {
+                                    "id": "123",
+                                     "description": "test",
+                                     "status": "OPEN"
+                                    }
+                                    
+
+                        
+                            
+                                        """));
+    }
+
+
+    @Test
+    void ShouldReturnToDoById() throws Exception {
+        ToDo todo = new ToDo("123", "test" ,Status.OPEN);
+        toDoRepo.get(todo);
+
+        mockMvc.perform(get("/api/todo/123"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
@@ -60,10 +87,6 @@ class ControllerTests {
                                         """));
     }
 
-
-    @Test
-    void giveDetailsofToDo() {
-    }
 
     @Test
     void addToDo() {
